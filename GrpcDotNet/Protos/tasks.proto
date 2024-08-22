@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcDotNet";
+
+package dutytasks;
+
+// Then we'll have an endpoints here. All endpoints stored in "service"
+
+service TasksActions {
+  
+// Create
+  rpc CreateDutyTask(CreateTaskRequest) returns (CreateTaskResponse) {}
+  
+// Read single
+  rpc GetSingleDutyTask(ReadTaskRequest) returns (ReadTaskResponse) {}
+
+// Read list
+  rpc GetAllDutyTasks(GetAllTasksRequest) returns (GetAllTasksResponse) {}
+  
+// Update
+  rpc UpdateDutyTask(UpdateTaskRequest) returns (UpdateTaskResponse) {}
+  
+// Delete
+  rpc RemoveDutyTask(DeleteTaskRequest) returns (DeleteTaskResponse) {}
+}
+
+message CreateTaskRequest {
+  string task_name = 1;
+  string description = 2;
+}
+
+message CreateTaskResponse {
+  int32 id = 1;
+}
+
+message ReadTaskRequest {
+  int32 id = 1;
+}
+
+message ReadTaskResponse {
+  int32 id = 1;
+  string task_name = 2;
+  string description = 3;
+  string task_status = 4;
+}
+
+message GetAllTasksRequest {}
+
+message GetAllTasksResponse {
+  repeated ReadTaskResponse duty_task = 1;
+}
+
+message UpdateTaskRequest {
+  int32 id = 1;
+  string task_name = 2;
+  string description = 3;
+  string task_status = 4;
+}
+
+message UpdateTaskResponse {
+  int32 id = 1;
+}
+
+message DeleteTaskRequest {
+  int32 id = 1;
+}
+
+message DeleteTaskResponse {
+  int32 id = 1;
+}
