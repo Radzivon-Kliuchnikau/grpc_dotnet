@@ -2,6 +2,8 @@ syntax = "proto3";
 
 option csharp_namespace = "GrpcDotNet";
 
+import "google/api/annotations.proto";
+
 package dutytasks;
 
 // Then we'll have an endpoints here. All endpoints stored in "service"
@@ -9,19 +11,41 @@ package dutytasks;
 service TasksActions {
   
 // Create
-  rpc CreateDutyTask(CreateTaskRequest) returns (CreateTaskResponse) {}
+  rpc CreateDutyTask(CreateTaskRequest) returns (CreateTaskResponse) {
+    option (google.api.http) = {
+      post: "/v1/dutyTask",
+      body: "*"
+    };
+  }
   
 // Read single
-  rpc GetSingleDutyTask(ReadTaskRequest) returns (ReadTaskResponse) {}
+  rpc GetSingleDutyTask(ReadTaskRequest) returns (ReadTaskResponse) {
+    option (google.api.http) = {
+      get: "/v1/dutyTask/{id}"
+    };
+  }
 
 // Read list
-  rpc GetAllDutyTasks(GetAllTasksRequest) returns (GetAllTasksResponse) {}
+  rpc GetAllDutyTasks(GetAllTasksRequest) returns (GetAllTasksResponse) {
+    option (google.api.http) = {
+      get: "/v1/dutyTask"
+    };
+  }
   
 // Update
-  rpc UpdateDutyTask(UpdateTaskRequest) returns (UpdateTaskResponse) {}
+  rpc UpdateDutyTask(UpdateTaskRequest) returns (UpdateTaskResponse) {
+    option (google.api.http) = {
+      put: "/v1/dutyTask",
+      body: "*"
+    };
+  }
   
 // Delete
-  rpc RemoveDutyTask(DeleteTaskRequest) returns (DeleteTaskResponse) {}
+  rpc RemoveDutyTask(DeleteTaskRequest) returns (DeleteTaskResponse) {
+    option (google.api.http) = {
+      delete: "/v1/dutyTask/{id}"
+    };
+  }
 }
 
 message CreateTaskRequest {
